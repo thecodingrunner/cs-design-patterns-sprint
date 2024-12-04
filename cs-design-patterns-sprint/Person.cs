@@ -17,33 +17,73 @@ namespace cs_design_patterns_sprint
         public readonly string PhoneNumber;
         public readonly string Email;
 
-        public Person(string firstName, string lastName, int age, string address, string phoneNumber, string email)
+        private Person(string firstName, string lastName, int age, string address, string phoneNumber, string email)
         {
-            if (string.IsNullOrEmpty(firstName) || string.IsNullOrEmpty(lastName))
-            {
-                throw new ArgumentException("First and last name cannot be null or empty");
-            }
-            if (age <= 0)
-            {
-                throw new ArgumentException("Age must be a positive integer");
-            }
-
-            if (!ValidatePhoneNumber(phoneNumber))
-            {
-                throw new ArgumentException("Invalid UK phone number");
-            }
-
-            if (!ValidateEmail(email))
-            {
-                throw new ArgumentException("Invalid email address");
-            }
-
             this.FirstName = firstName;
             this.LastName = lastName;
             this.Age = age;
+            this.Email = email;
             this.Address = address;
             this.PhoneNumber = phoneNumber;
-            this.Email = email;
+        }
+
+        public class Builder
+        {
+            // TODO: include private fields here to match the Person class
+            public string FirstName;
+            public string LastName;
+            public int Age;
+            public string Address;
+            public string PhoneNumber;
+            public string Email;
+
+            public Builder(string firstName, string lastName, int age)
+            {
+                if (string.IsNullOrEmpty(firstName) || string.IsNullOrEmpty(lastName))
+                {
+                    throw new ArgumentException("First and last name cannot be null or empty");
+                }
+                if (age <= 0)
+                {
+                    throw new ArgumentException("Age must be a positive integer");
+                }
+
+                this.FirstName = firstName;
+                this.LastName = lastName;
+                this.Age = age;
+            }
+
+            // example of an optional parameter
+            public Builder WithAddress(string address)
+            {
+                this.Address = address;
+                return this;
+            }
+
+            public Builder WithPhoneNumber(string phoneNumber)
+            {
+                if (!ValidatePhoneNumber(phoneNumber))
+                {
+                    throw new ArgumentException("Invalid UK phone number");
+                }
+                this.PhoneNumber = phoneNumber;
+                return this;
+            }
+
+            public Builder WithEmail(string email)
+            {
+                if (!ValidateEmail(email))
+                {
+                    throw new ArgumentException("Invalid email address");
+                }
+                this.Email = email;
+                return this;
+            }
+
+            public Person Build()
+            {
+                return new Person(this.FirstName, this.LastName, this.Age, this.Address, this.PhoneNumber, this.Email);
+            }
         }
 
         public override string ToString()

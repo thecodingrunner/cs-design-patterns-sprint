@@ -5,8 +5,8 @@ using cs_design_patterns_sprint;
 var config = new ConfigManager("https://example.com/db/url", 1000, 2000);
 
 // PART ONE
-Person person = new("Juniper", "Doolittle", 30, "12 High Street", "07234567890", "juniper@example.com");
-Console.WriteLine(person);
+Person person1 = new Person.Builder("Juniper", "Doolittle", 30).WithEmail("juniper@example.com").WithAddress("12 High Street").Build();
+Console.WriteLine(person1);
 config.IncrementDataCount(); // ignore this for now
 
 // PART TWO
