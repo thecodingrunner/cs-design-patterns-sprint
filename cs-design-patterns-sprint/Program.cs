@@ -1,5 +1,6 @@
 ﻿
 using System;
+using System.Runtime.InteropServices.JavaScript;
 using cs_design_patterns_sprint;
 using cs_design_patterns_sprint.Transport;
 
@@ -45,3 +46,13 @@ wifiTransport.Display();
 
 ITransportDecorator bothTransport = new GPSDecorator(wifiTransport);
 bothTransport.Display();
+
+
+
+
+//Part 5 OBSERVER
+TicketManager ticketManager = new TicketManager();
+
+
+
+//ticketManager.AddObserver();
