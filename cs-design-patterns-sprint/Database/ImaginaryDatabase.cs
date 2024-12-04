@@ -16,7 +16,7 @@ namespace cs_design_patterns_sprint
             Console.WriteLine("Flushing data queue...");
 
             // let's see if there's any data waiting to be saved
-            var config = new ConfigManager("https://example.com/db/url", 1000, 2000);
+            var config = ConfigManager.GetInstance("https://example.com/db/url", 1000, 2000);
 
             if (config.DataCounter > 0)
             {

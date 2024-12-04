@@ -1,8 +1,9 @@
 ﻿
 using System;
 using cs_design_patterns_sprint;
+using cs_design_patterns_sprint.Transport;
 
-var config = new ConfigManager("https://example.com/db/url", 1000, 2000);
+var config = ConfigManager.GetInstance("https://example.com/db/url", 1000, 2000);
 
 // PART ONE
 //Person person1 = new Person.Builder("Juniper", "Doolittle", 30).WithEmail("juniper@example.com").WithAddress("12 High Street").Build();
@@ -33,5 +34,14 @@ config.IncrementDataCount(); // ignore this for now
  ImaginaryDatabase.FlushDataQueue();
 
 // PART FOUR
-// ITransport basicTransport = new BasicTransport("Basic");
-// basicTransport.Display();
+ITransport basicTransport = new BasicTransport("Basic");
+basicTransport.Display();
+
+ITransportDecorator gpsTransport = new GPSDecorator(basicTransport);
+gpsTransport.Display();
+
+ITransportDecorator wifiTransport = new WifiDecorator(basicTransport);
+wifiTransport.Display();
+
+ITransportDecorator bothTransport = new GPSDecorator(wifiTransport);
+bothTransport.Display();
