@@ -30,7 +30,7 @@ namespace cs_design_patterns_sprint
             observer.Update(availableTickets);
         }
     }
-
+        
     public void SetAvailableTickets(int newAvailableTickets)
     {
         this.availableTickets = newAvailableTickets;
